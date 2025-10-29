@@ -13,7 +13,7 @@ const app = express();
 //setting views
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true}));  
 
 //router
 app.use("/create", createRouter);
@@ -29,3 +29,8 @@ app.listen(PORT, (error) => {
     console.log(`Connection successful and the port listening at: ${PORT}`)
 })
 
+
+
+app.use((error, req, res, next) => {
+    if(error) throw new Error(error);
+})
