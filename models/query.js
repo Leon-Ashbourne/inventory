@@ -45,8 +45,15 @@ async function gamesByCategoryGet(category) {
 }
 
 
+async function addGame({ name, genre, released }) {
+    await pool.query(`INSERT INTO games (name, genre, released) VALUES ($1, $2, $3);`, [name, genre, released]);
+    return;
+}
+
+
 module.exports = {
     getGames,
     getEachCategory,
-    gamesByCategoryGet
+    gamesByCategoryGet,
+    addGame
 }
