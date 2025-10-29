@@ -1,0 +1,19 @@
+<html>
+    <title><%= title %></title>
+    <body>
+        <h1><%= title %></h1>
+        <form action="/create" method="POST">
+            <label for="name">Game title: </label>
+            <input type="text" name="name" id="name" required>
+            <label for="genre">Genre: </label>
+            <input type="text" name="genre" id="genre" required>
+            <label for="released">Release year: </label>
+            <input type="text" name="released" id="released" required>
+            <button type="submit">Enter</button>
+        </form>
+        <% if(locals.errors) {%>
+            <%- include("validationErrors")%>
+        <%}%>
+        <a href="/">Back to home</a>
+    </body>
+</html>
