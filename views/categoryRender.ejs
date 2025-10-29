@@ -1,0 +1,17 @@
+<html>
+    <title><%= title %></title>
+    <body>
+        <h1><%= title %></h1>
+        <%if(data.length > 0) {%>
+            <ul>
+                <% data.forEach((category) =>{%>
+                    <li>
+                        <%= category.category%> <%= category.title %> <%= category.rank %> <%= category.price %>
+                    </li>
+                <%})%>
+            </ul>
+        <%}%>
+        <a href="/category">Back to categories</a>
+        <a href="/">Back to home</a>
+    </body>
+</html>
