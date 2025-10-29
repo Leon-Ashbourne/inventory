@@ -29,15 +29,16 @@ function createGet (req, res) {
 
 // validate game details
 const nameErr = "must not be empty";
-const genreErr = "must only cotain alphabets";
+const genreErr = "must not be empty";
 const relErr= "must only contain numbers";
 const restErr = "must be a positive number";
 
 const validate = [
+    //add flexible validators next time
     body("name").trim()
         .not().isEmpty().withMessage(`name ${nameErr}`),
     body("genre").trim()
-        .isAlpha().withMessage(`genre ${genreErr}`),
+        .notEmpty().withMessage(`genre ${genreErr}`),
     body("released").trim()
         .isInt().withMessage(`relase date ${relErr}`)
         .custom((value) => {
@@ -54,7 +55,7 @@ exports.createPost = [
         // get more column values from the user
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
-            return res.status(400).render("create", {
+            return res.status(400).render("create/create", {
                 title: "Add Game",
                 errors: errors.array()
             })
