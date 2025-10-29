@@ -1,12 +1,11 @@
 const { Router } = require("express");
-const createController = require("../controller/createControler");
+const createController = require("../controller/createController");
 
 const createRouter = Router();
 
-createRouter.get("/", createController.createGet);
-createRouter.post("/", createController.createPost);
 
-
+createRouter.post("/authenticate", createController.authenticate);
+createRouter.use(createController.authenticateGet);
 
 
 module.exports = createRouter;
