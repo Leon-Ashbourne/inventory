@@ -5,6 +5,7 @@ const createRouter = Router();
 
 
 createRouter.post("/authenticate", createController.authenticate);
+createRouter.post("/create", createController.createPost);
 createRouter.use(createController.authenticateGet);
 
 
