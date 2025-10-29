@@ -38,6 +38,10 @@ const SQL = `
         average_monthly_profits INTEGER
     );
 
+    CREATE TABLE IF NOT EXISTS category (
+        id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        category VARCHAR (255)
+    );
 
     INSERT INTO games (name, genre, released)
     VALUES 
@@ -193,6 +197,10 @@ const SQL = `
     (26, 5000000, 59.99, 10000000),
     (27, 250000000, 0.00, 600000000),
     (29, 20000000, 59.99, 50000000);
+
+    INSERT INTO category (category) 
+    VALUES ('company'),
+    ('genre');
 
 `
 
