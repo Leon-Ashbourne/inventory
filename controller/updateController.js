@@ -2,6 +2,11 @@ const db = require("../models/query");
 const { body, validationResult, matchedData } = require("express-validator");
 
 
+exports.updateAuthGet = (req, res, next) => {
+    res.locals.action = "/update/updategame";
+    next();
+}
+
 exports.updateGet = (req, res) => {
     res.render("update/update", {title: "update", header: "Update data: "});    
 }
