@@ -8,13 +8,24 @@
             <a href="/create">Add game</a>
         </div>
         <main>
-            <% if(games.length > 0) {%>
-                <ul>
-                    <%games.forEach((game) => {%>
-                        <%- include("dataList", {game: game}) %>
-                    <%})%>
-                </ul>
-            <%} else {%>
+            <table>
+                    <caption>
+                        Online games
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%games.forEach((game) => {%>
+                            <%- include("dataList", {game: game}) %>
+                        <%})%>
+                    </tbody>
+                </table>
                 <h3>No data...</h3>
             <%}%>
         </main>
