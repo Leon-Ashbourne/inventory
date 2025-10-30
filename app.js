@@ -1,11 +1,13 @@
 const express = require("express");
 const homeRouter = require("./routes/homeRouter");
-const path = require("node:path");
 const createRouter = require("./routes/createRouter");
 const categoryRouter = require("./routes/categoryRouter");
-
+const path = require("path");
 
 const app = express();
+
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
 
 //setting views
 app.set("views", path.join(__dirname, "views"));
