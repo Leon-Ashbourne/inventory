@@ -2,7 +2,7 @@
     <title><%= title %></title>
     <body>
         <h1><%= head %></h1>
-        <form action="/create/authenticate" method="POST">
+        <form method="POST" action=<%= action %> >
             <label for="password">Enter password:</label>
             <input type="text" id="password" name="password">
             <button type="submit">Submit</button>
