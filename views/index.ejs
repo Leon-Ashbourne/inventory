@@ -8,7 +8,8 @@
             <a href="/create">Add game</a>
         </div>
         <main>
-            <table>
+            <% if(games.length > 0) {%>
+                <table>
                     <caption>
                         Online games
                     </caption>
@@ -26,6 +27,7 @@
                         <%})%>
                     </tbody>
                 </table>
+            <%} else {%>
                 <h3>No data...</h3>
             <%}%>
         </main>
