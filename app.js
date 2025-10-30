@@ -3,6 +3,7 @@ const homeRouter = require("./routes/homeRouter");
 const path = require("node:path");
 const createRouter = require("./routes/createRouter");
 const categoryRouter = require("./routes/categoryRouter");
+const updateRouter = require("./routes/updateRouter");
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.urlencoded({extended: true}));
 //router
 app.use("/create", createRouter);
 app.use("/category", categoryRouter);
+app.use("/update", updateRouter);
 app.use("/", homeRouter);
 
 
