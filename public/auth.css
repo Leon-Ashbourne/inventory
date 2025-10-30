@@ -1,0 +1,53 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Helvetica", "Arial", sans-serif;;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* main stying */
+main {
+    display: grid;
+    justify-content: center;
+    margin: 20vh auto 0;
+    border: 2px solid #999999;
+    max-width: 80vw;
+    padding: 2rem;
+}
+
+
+h1 {
+    margin: 20px;
+    border-bottom: 2px solid black;
+    font-size: 3rem;
+}
+
+.form-container {
+    margin-top: 20px;
+    padding: 1rem;
+}
+
+form {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+button {
+    padding: 4px 12px;
+    font-size: 1.1rem;
+}
+
+.home-button {
+    text-align: center;
+}
+input {
+    height: 2rem;
+    font-size: 1.2rem;
+}
+
