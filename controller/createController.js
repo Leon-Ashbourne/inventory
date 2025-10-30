@@ -10,7 +10,7 @@ exports.authenticateGet = (req, res) => {
 };
 
 
-function authenticatePost(req, res, next) {
+exports.authenticatePost = (req, res, next) => {
     const { password } = req.body;
 
     if(password === process.env.AUTH_PASSWORD) {
@@ -22,7 +22,7 @@ function authenticatePost(req, res, next) {
     }
 };
 
-function createGet (req, res) {
+exports.createGet = (req, res) => {
     res.render("create/create", {title: "New game"});
 }
 
@@ -67,5 +67,3 @@ exports.createPost = [
         res.redirect("/");
     }
 ]
-
-exports.authenticate = [authenticatePost, createGet]
