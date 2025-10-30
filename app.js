@@ -19,6 +19,10 @@ app.use("/category", categoryRouter);
 app.use("/update", updateRouter);
 app.use("/", homeRouter);
 
+// bad url
+app.use((req, res) => {
+    res.status(404).render("badurl", {title: "error", msg: "Error, the request returned with a status code of 404."});
+})
 
 const PORT = process.env.PORT || 3030;
 
