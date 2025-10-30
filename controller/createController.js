@@ -5,8 +5,14 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 //authenticate to add new game details
+exports.createAuthGet = (req, res, next) => {
+    res.locals.action = "/create/newgame";
+    next();
+}
+
 exports.authenticateGet = (req, res) => {
-    res.render("auth/auth", {head: "Admin password is required: ", title: "authenticate"});
+    const {action} = res.locals;
+    res.render("auth/auth", {head: "Admin password is required: ", title: "authenticate", action: action });
 };
 
 
