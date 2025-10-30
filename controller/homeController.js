@@ -2,7 +2,7 @@ const db = require("../models/query");
 
 async function homeController(req, res) {
     const games = await db.getGames()
-    res.render("index", {games: games, title: "Games: "});
+    res.render("index", {games: games, title: "All the available games from our inventory: "});
 }
 
 
