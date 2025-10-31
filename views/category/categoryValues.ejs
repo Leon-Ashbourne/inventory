@@ -1,0 +1,9 @@
+<ul>
+    <% if(locals[category]) {%>
+        <%locals[category].forEach((value) => {%>
+            <li><a href=<%= "category/" + category + "/" + value[category] %> ><%= value[category] %> </a></li>
+        <%})%>
+    <%} else {%>
+        <p>No available category values...</p>
+    <%}%>
+</ul>

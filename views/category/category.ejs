@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <a href="/">Back to home</a>
+        <h1><%= title %></h1>
+        <% if(categories.length > 0) {%>
+                <% categories.forEach((category) => { %> 
+                    <h2><%= category.category %></h2>
+                    <%- include("categoryValues", {category: category.category})%>
+                <%})%>
+        <% } else {%>
+            <h2>No categories to be found...</h2>
+        <%}%>
+    </body>
+</html>
