@@ -200,7 +200,8 @@ const SQL = `
 
     INSERT INTO category (category) 
     VALUES ('company'),
-    ('genre');
+    ('genre'),
+    ('year');
 
 `
 
