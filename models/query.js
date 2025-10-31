@@ -93,9 +93,7 @@ module.exports = {
     yearGet,
 
     //verify
-    getEachCategory,
     gamesByCategoryGet,
     addGame,
-    categoriesGet,
     categoryValuesGet
 }
