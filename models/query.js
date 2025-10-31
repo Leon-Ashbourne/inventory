@@ -1,5 +1,6 @@
 const pool = require("./pool");
 
+//homepage query --modified
 async function getGames() {
     const sql = `
         SELECT games.id AS ID, games.name AS title , genre AS Genre , gr.rank AS Rank, audience AS Players
@@ -13,11 +14,23 @@ async function getGames() {
     return rows;
 }
 
-async function getEachCategory() {
-    const { rows } = await pool.query("SELECT DISTINCT category AS category FROM category");
+//category values -- modified
+async function genreGet() {
+    const { rows } = await pool.query(`SELECT DISTINCT genre FROM game_genres`);
     return rows;
 }
 
+async function companyGet() {
+    const { rows } = await pool.query(`SELECT DISTINCT company FROM game_publishers`);
+    return rows;
+}
+
+async function yearGet() {
+    const { rows } = await pool.query(`SELECT DISTINCT year FROM games`);
+    return rows;
+}
+
+//retrieves data for values under category --need to modify
 async function gamesByCategoryGet(category) {
 
     let sql = `
@@ -46,26 +59,7 @@ async function gamesByCategoryGet(category) {
     return rows;
 }
 
-async function genreGet() {
-    const { rows } = await pool.query(`SELECT DISTINCT genre FROM games`);
-    return rows;
-}
-
-async function companyGet() {
-    const { rows } = await pool.query(`SELECT DISTINCT company FROM game_company`);
-    return rows;
-}
-
-async function yearGet() {
-    const { rows } = await pool.query(`SELECT DISTINCT released AS year FROM games`);
-    return rows;
-}
-
-async function categoriesGet() {
-    const { rows } = await pool.query(`SELECT category FROM category`);
-    return rows;
-}
-
+//new game -- need to modify
 async function addGame({ name, genre, released }) {
     await pool.query(`INSERT INTO games (name, genre, released) VALUES ($1, $2, $3);`, [name, genre, released]);
     return;
@@ -91,14 +85,17 @@ async function categoryValuesGet(name, value) {
     return rows;
 }
 
+
 module.exports = {
     getGames,
-    getEachCategory,
-    gamesByCategoryGet,
-    addGame,
     genreGet,
     companyGet,
     yearGet,
+
+    //verify
+    getEachCategory,
+    gamesByCategoryGet,
+    addGame,
     categoriesGet,
     categoryValuesGet
 }
