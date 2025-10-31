@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/home.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/category">Categories</a></li>
+                <li><a href="/create">Add game</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1><%= title %></h1>
+            <% if(games.length > 0) {%>
+                <table>
+                    <caption>
+                        Online games
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Players</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%games.forEach((game) => {%>
+                            <%- include("dataList", {game: game}) %>
+                        <%})%>
+                    </tbody>
+                </table>
+            <%} else {%>
+                <h3>No data...</h3>
+            <%}%>
+        </main>
+    </body>
+</html>
