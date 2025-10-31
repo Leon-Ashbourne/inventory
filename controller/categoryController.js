@@ -1,11 +1,6 @@
 const db = require("../models/query");
 
-async function categoryGet(req, res, next) {
-    const categories = await db.getEachCategory();
-    res.locals.categories = categories
-    next();
-}
-
+//category controller --modified
 async function valuesByCategoryGet(req, res, next) {
     // write a more flexible code to get category wise details
     const genre = await db.genreGet();
@@ -20,13 +15,13 @@ async function valuesByCategoryGet(req, res, next) {
 
 function categoryValues(req, res) {
     const [ genre, year, company ] = [...res.locals.categoryValues];
-    const { categories } = res.locals;
 
-    res.render("category/category", { title: "Available Categories: ", categories: categories, genre, year, company });
+    res.render("category/category", { title: "Available Categories: ", categories: [ "genre", "year", "company" ], genre, year, company });
 }
 
-const categoryMid = [categoryGet, valuesByCategoryGet, categoryValues];
+const categoryMid = [ valuesByCategoryGet, categoryValues ];
 
+// values inside category --need to modify
 async function byCategoryGet(req, res, next) {
     const category = await db.categoriesGet();
 
