@@ -65,7 +65,7 @@ const SQL = `
     ('Apex Legends', 2019),
     ('Cyberpunk 2077', 2020),
     ('Tetris Effect', 2018),
-    ('Baldur\'s Gate 3', 2023),
+    ('Baldurs Gate 3', 2023),
     ('Helldivers 2', 2024),
     ('Dead Cells', 2018),
     ('Terraria', 2011),
@@ -74,7 +74,9 @@ const SQL = `
     ('Dota 2', 2013),
     ('Slay the Spire', 2019),
     ('The Sims 4', 2014),
-    ('Fortnite', 2017);
+    ('Fortnite', 2017),
+    ('Assassin’s Creed Valhalla', 2020),
+    ('Dark Souls III', 2016);
 
     INSERT INTO game_genres (genre)
     VALUES 
@@ -101,7 +103,7 @@ const SQL = `
     ('Racing / Open World'),
     ('Card Battler / Roguelike');
 
-    INSERT INTO game_reviews (game_id, reviews_count, rating)
+    INSERT INTO game_reviews (game_id, reviews_count, ratings)
     VALUES 
     (1, 3500000, 9.7),
     (2, 15000000, 9.4),
