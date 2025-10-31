@@ -2,9 +2,11 @@ const pool = require("./pool");
 
 async function getGames() {
     const sql = `
-        SELECT games.id AS ID, games.name AS title , games.genre AS Genre , game_rankings.global_rankings AS Rank
+        SELECT games.id AS ID, games.name AS title , genre AS Genre , gr.rank AS Rank, audience AS Players
         FROM games
-        LEFT JOIN game_rankings ON games.id = game_rankings.game_id
+        LEFT JOIN game_ranks as gr ON gr.game_id = games.id
+        LEFT JOIN game_publishers_genre as gpg ON gpg.game_id = gr.game_id
+        LEFT JOIN game_genres as gg ON gg.id = gpg.genre_id;
     `
     const { rows } = await pool.query(sql);
 
