@@ -11,7 +11,7 @@ const SQL = `
     CREATE TABLE IF NOT EXISTS game_genres (
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         genre VARCHAR(255)
-    )
+    );
 
     CREATE TABLE IF NOT EXISTS game_reviews (
         game_id INTEGER REFERENCES games(id),
@@ -34,14 +34,14 @@ const SQL = `
     CREATE TABLE IF NOT EXISTS game_purchases (
         game_id INTEGER REFERENCES games(id),
         total_purchases INTEGER,
-        price INTEGER,
+        price INTEGER
     );
 
     CREATE TABLE IF NOT EXISTS game_publishers_genre (
         game_id INTEGER REFERENCES games(id),
-        publishers_id INTEGER REFERENCES game_publishers(id),
+        publisher_id INTEGER REFERENCES game_publishers(id),
         genre_id INTEGER REFERENCES game_genres(id)
-    )
+    );
 
     INSERT INTO games (name, year)
     VALUES 
@@ -229,7 +229,7 @@ const SQL = `
     (31, 12000000, 59.99),
     (32, 8000000, 69.99);
 
-    INSERT INTO game_publishers_genre (game_id, company_id, genre_id) 
+    INSERT INTO game_publishers_genre (game_id, publisher_id, genre_id) 
     VALUES 
     (1, 1, 1),
     (2, 2, 2),
