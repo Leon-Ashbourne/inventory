@@ -28,7 +28,7 @@ function categoryValues(req, res) {
 
 const categoryMid = [ valuesByCategoryGet, categoryValues ];
 
-// values inside category --modifying
+// values inside category --modified
 async function byCategoryGet(req, res, next) {
     const cg = Object.values(categories);
     const { name, id } = req.params;
@@ -43,10 +43,16 @@ async function byCategoryGet(req, res, next) {
 async function valuesGet(req, res) {
     const { name, id } = req.params;
 
-    let values = [];
-    if(name === "genre") values = db.genreGet({ name, id}) // genre
+    let values;
+    if(name === "genre") {
+        values = await db.genreValuesGet(id);
+    }else if(name === "company") {
+        values = await db.publisherValuesGet(id);
+    }else if(name === "year") {
+        values = await db.yearValuesGet(id);
+    }
 
-    res.render("category/values/values", {values, title:`Values under ${name} for ${id}`});
+    res.render("category/values/values", {values, title: `games with under ${name}`, header: "Available game details"});
 }
 
 const categValMid = [byCategoryGet, valuesGet ];
