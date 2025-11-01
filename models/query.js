@@ -31,7 +31,7 @@ async function yearGet() {
 }
 
 //category-values --modified
-async function genreValuesGet({ name, id }) {
+async function genreValuesGet(id) {
     const SQL = `
         SELECT name AS title, price, audience, reviews_count as reviews, ratings 
         FROM game_genres ggr
