@@ -1,5 +1,12 @@
 const db = require("../models/query");
 
+
+const categories = Object.freeze({
+    0: "genre",
+    1: "year",
+    2: "company"
+})
+
 //category controller --modified
 async function valuesByCategoryGet(req, res, next) {
     // write a more flexible code to get category wise details
@@ -16,26 +23,17 @@ async function valuesByCategoryGet(req, res, next) {
 function categoryValues(req, res) {
     const [ genre, year, company ] = [...res.locals.categoryValues];
 
-    res.render("category/category", { title: "Available Categories: ", categories: [ "genre", "year", "company" ], genre, year, company });
+    res.render("category/category", { title: "Available Categories: ", categories: Object.values(categories), genre, year, company });
 }
 
 const categoryMid = [ valuesByCategoryGet, categoryValues ];
 
-// values inside category --need to modify
+// values inside category --modifying
 async function byCategoryGet(req, res, next) {
-    const category = await db.categoriesGet();
+    const cg = Object.values(categories);
+    const { name, id } = req.params;
 
-    res.locals.category = category.map((cg) => {
-        return cg.category;
-    });
-
-    next();
-}
-
-async function checkCategoryGet(req, res, next) {
-    const { name, value } = req.params;
-    const isContains = res.locals.category.includes(name);
-
+    const isContains = cg.includes(name);
     if(!isContains) {
         res.status(400).render("error", {title: "Error, entered a bad url. The request reeturned with a 400 status code.."})
     }
@@ -43,18 +41,15 @@ async function checkCategoryGet(req, res, next) {
 }
 
 async function valuesGet(req, res) {
-    const { name, value } = req.params;
-    let newName = name;
+    const { name, id } = req.params;
 
-    if(value === "rank") newName = "global_rankings"
-    else if(value === "year") newName = "released"
+    let values = [];
+    if(name === "genre") values = db.genreGet({ name, id}) // genre
 
-    const categoryValues = await db.categoryValuesGet(newName, value);
-
-    res.render("category/values/values", {values: categoryValues, title:`Values under ${name} for ${value}`});
+    res.render("category/values/values", {values, title:`Values under ${name} for ${id}`});
 }
 
-const categValMid = [byCategoryGet, checkCategoryGet, valuesGet ];
+const categValMid = [byCategoryGet, valuesGet ];
 
 
 module.exports = {
