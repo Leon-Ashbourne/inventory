@@ -81,7 +81,11 @@ async function yearValuesGet(yr) {
 //new game -- need to modify
 async function addGame({ name, genre, released }) {
     //need to modify
-    // await pool.query(`INSERT INTO games (name, genre, released) VALUES ($1, $2, $3);`, [name, genre, released]);
+    //add more details. update tables like game_publishers_genre, and the respective relations
+
+    // await pool.query(`INSERT INTO games (name, year) VALUES ($1, $2);`, [name, released]);
+    // await pool.query(`INSERT INTO game_genres (genre) VALUES ($1);`, [genre]);
+
     return;
 }
 
