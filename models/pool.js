@@ -4,13 +4,8 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+const { PGURL } = process.env;
+
 module.exports = new Pool({
-    host: process.env.HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-    ssl: {
-        require: true,
-    },
+    connectionString: PGURL
 })
