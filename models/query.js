@@ -47,6 +47,22 @@ async function genreValuesGet({ name, id }) {
     return rows;
 }
 
+async function publisherValuesGet(id) {
+    const SQL = `
+        SELECT name AS title, price, audience, reviews_count as reviews, ratings
+        FROM game_publishers gpb
+        LEFT JOIN game_publishers_genre as gpg ON gpg.publisher_id = gpb.id
+        LEFT JOIN  games ON gpg.game_id = games.id
+        LEFT JOIN game_ranks as gr ON games.id = gr.game_id
+        LEFT JOIN game_reviews as gt ON gt.game_id = gr.game_id
+        LEFT JOIN game_purchases as gp ON gp.game_id = gt.game_id
+        WHERE gpb.id = ($1)
+    `
+
+    const { rows } = await pool.query(SQL, [id]);
+    return rows;
+}
+
 //new game -- need to modify
 async function addGame({ name, genre, released }) {
     await pool.query(`INSERT INTO games (name, genre, released) VALUES ($1, $2, $3);`, [name, genre, released]);
