@@ -40,7 +40,7 @@ async function genreValuesGet({ name, id }) {
         LEFT JOIN game_ranks as gr ON games.id = gr.game_id
         LEFT JOIN game_reviews as gt ON gt.game_id = gr.game_id
         LEFT JOIN game_purchases as gp ON gp.game_id = gt.game_id
-        WHERE ggr.id = ($1)
+        WHERE ggr.id = ($1);
     `
 
     const { rows } = await pool.query(SQL, [id]);
@@ -56,10 +56,25 @@ async function publisherValuesGet(id) {
         LEFT JOIN game_ranks as gr ON games.id = gr.game_id
         LEFT JOIN game_reviews as gt ON gt.game_id = gr.game_id
         LEFT JOIN game_purchases as gp ON gp.game_id = gt.game_id
-        WHERE gpb.id = ($1)
+        WHERE gpb.id = ($1);
     `
 
     const { rows } = await pool.query(SQL, [id]);
+    return rows;
+}
+
+async function yearValuesGet(yr) {
+    const SQL = `
+        SELECT name AS title, price, audience, reviews_count as reviews, ratings 
+        FROM games
+        LEFT JOIN game_publishers_genre as gpg ON gpg.genre_id = games.id
+        LEFT JOIN game_ranks as gr ON gpg.game_id = gr.game_id
+        LEFT JOIN game_reviews as gt ON gt.game_id = gr.game_id
+        LEFT JOIN game_purchases as gp ON gp.game_id = gt.game_id
+        WHERE games.year = ($1);
+    `;
+
+    const { rows } = await pool.query(SQL, [yr]);
     return rows;
 }
 
@@ -79,6 +94,7 @@ module.exports = {
     yearGet,
     genreValuesGet,
     publisherValuesGet,
+    yearValuesGet,
 
     //verify
     addGame,
