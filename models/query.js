@@ -30,20 +30,20 @@ async function yearGet() {
     return rows;
 }
 
-//category-values 
-async function genreGet({ name, id }) {
+//category-values --modified
+async function genreValuesGet({ name, id }) {
     const SQL = `
-        SELECT name AS title, price, audience, reviews_count, ratings 
-        FROM genre
-        LEFT JOIN game_publishers_genre as gpg ON gpg.genre_id = genre.id
+        SELECT name AS title, price, audience, reviews_count as reviews, ratings 
+        FROM game_genres ggr
+        LEFT JOIN game_publishers_genre as gpg ON gpg.genre_id = ggr.id
         LEFT JOIN  games ON gpg.game_id = games.id
         LEFT JOIN game_ranks as gr ON games.id = gr.game_id
-        LEFT JOIN game_ratings as gt ON gt.game_id = gr.game_id
+        LEFT JOIN game_reviews as gt ON gt.game_id = gr.game_id
         LEFT JOIN game_purchases as gp ON gp.game_id = gt.game_id
-        WHERE ($1) = ($2)
+        WHERE ggr.id = ($1)
     `
 
-    const { rows } = await pool.query(SQL, [name, id]);
+    const { rows } = await pool.query(SQL, [id]);
     return rows;
 }
 
@@ -61,7 +61,8 @@ module.exports = {
     genreGet,
     companyGet,
     yearGet,
-    genreGet,
+    genreValuesGet,
+    publisherValuesGet,
 
     //verify
     addGame,
