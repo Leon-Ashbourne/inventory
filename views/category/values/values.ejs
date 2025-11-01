@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <h1><%= header %></h1>
+        <table>
+            <thead>
+                <tr>
+                    <th scop="col">Title</th>
+                    <th scop="col">Price</th>
+                    <th scop="col">Players</th>
+                    <th scop="col">Reviews</th>
+                    <th scop="col">Ratings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%if(locals.values) {%>
+                    <% values.forEach((value) => {%>
+                        <%- include("tbody", {value})%>
+                    <%})%>
+                <%}%>
+            </tbody>
+        </table>
+    </body>
+</html>
