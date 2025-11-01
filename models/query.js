@@ -16,12 +16,12 @@ async function getGames() {
 
 //category values -- modified
 async function genreGet() {
-    const { rows } = await pool.query(`SELECT DISTINCT genre FROM game_genres`);
+    const { rows } = await pool.query(`SELECT DISTINCT id, genre FROM game_genres`);
     return rows;
 }
 
 async function companyGet() {
-    const { rows } = await pool.query(`SELECT DISTINCT company FROM game_publishers`);
+    const { rows } = await pool.query(`SELECT DISTINCT id, company FROM game_publishers`);
     return rows;
 }
 
