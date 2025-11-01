@@ -14,7 +14,7 @@ async function getGames() {
     return rows;
 }
 
-//category values -- modified
+//category values --modified
 async function genreGet() {
     const { rows } = await pool.query(`SELECT DISTINCT id, genre FROM game_genres`);
     return rows;
@@ -30,31 +30,30 @@ async function yearGet() {
     return rows;
 }
 
+//category-values 
+async function genreGet({ name, id }) {
+    const SQL = `
+        SELECT name AS title, price, audience, reviews_count, ratings 
+        FROM genre
+        LEFT JOIN game_publishers_genre as gpg ON gpg.genre_id = genre.id
+        LEFT JOIN  games ON gpg.game_id = games.id
+        LEFT JOIN game_ranks as gr ON games.id = gr.game_id
+        LEFT JOIN game_ratings as gt ON gt.game_id = gr.game_id
+        LEFT JOIN game_purchases as gp ON gp.game_id = gt.game_id
+        WHERE ($1) = ($2)
+    `
+
+    const { rows } = await pool.query(SQL, [name, id]);
+    return rows;
+}
+
 //new game -- need to modify
 async function addGame({ name, genre, released }) {
     await pool.query(`INSERT INTO games (name, genre, released) VALUES ($1, $2, $3);`, [name, genre, released]);
     return;
 }
 
-async function categoryValuesGet(name, value) {
-    let sql = `
-        SELECT name, rank 
-        FROM games
-        WHERE ($1) = ($2);
-    `
-    if(name === "company") {
-        sql = `
-            SELECT name, rank
-            FROM games
-            RIGHT JOIN games_company ON game_id = games.id
-            WHERE ($1) = ($2); 
-        `
-    }
-    
 
-    const { rows } = pool.query(sql, [name, value]);
-    return rows;
-}
 
 
 module.exports = {
@@ -62,8 +61,8 @@ module.exports = {
     genreGet,
     companyGet,
     yearGet,
+    genreGet,
 
     //verify
     addGame,
-    categoryValuesGet
 }
