@@ -1,5 +1,7 @@
 const { Client } = require("pg");
 const process = require("node:process");
+require("dotenv").config();
+
 
 const SQL = `
     CREATE TABLE IF NOT EXISTS games (
@@ -271,7 +273,7 @@ const SQL = `
 async function main() {
 
     console.log("seeding....");
-    const dbUrl = process.argv[2];
+    const dbUrl = process.env.PGURL;
 
     const client = new Client({
         connectionString: dbUrl
