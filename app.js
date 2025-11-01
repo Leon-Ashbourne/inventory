@@ -30,6 +30,6 @@ app.listen(PORT, (error) => {
 
 
 
-app.use((error, req, res, next) => {
-    if(error) throw new Error(error);
-})
+// app.use((error, req, res, next) => {
+//     if(error) throw new Error(error);
+// })
