@@ -31,7 +31,7 @@ async function yearGet() {
 }
 
 //category-values --modified
-async function genreValuesGet({ name, id }) {
+async function genreValuesGet(id) {
     const SQL = `
         SELECT name AS title, price, audience, reviews_count as reviews, ratings 
         FROM game_genres ggr
@@ -80,7 +80,8 @@ async function yearValuesGet(yr) {
 
 //new game -- need to modify
 async function addGame({ name, genre, released }) {
-    await pool.query(`INSERT INTO games (name, genre, released) VALUES ($1, $2, $3);`, [name, genre, released]);
+    //need to modify
+    // await pool.query(`INSERT INTO games (name, genre, released) VALUES ($1, $2, $3);`, [name, genre, released]);
     return;
 }
 
