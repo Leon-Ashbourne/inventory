@@ -1,21 +1,28 @@
 <html>
     <head>
         <title><%= title %></title>
+        <link rel="stylesheet" href="/values.css">
     </head>
     <body>
         <nav>
-            <a href="/"> Back to home</a>
-            <a href="/category">Back to categories</a>
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/category">Categories</a>
+                </li>
+            </ul>
         </nav>
         <h1><%= header %></h1>
         <table>
             <thead>
                 <tr>
                     <th scop="col">Title</th>
-                    <th scop="col">Price</th>
-                    <th scop="col">Players</th>
+                    <th scop="col">Price ($)</th>
+                    <th scop="col">Players (monthly)</th>
                     <th scop="col">Reviews</th>
-                    <th scop="col">Ratings</th>
+                    <th scop="col">Ratings (/10)</th>
                 </tr>
             </thead>
             <tbody>
