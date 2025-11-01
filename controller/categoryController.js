@@ -52,14 +52,46 @@ async function valuesGet(req, res) {
         values = await db.yearValuesGet(id);
     }
 
-    res.render("category/values/values", {values, title: `games with under ${name}`, header: "Available game details"});
+    res.render("category/values/values", {values, title: `games with under ${name}`, header: "Available game details", url: `${id}`});
 }
 
 const categValMid = [byCategoryGet, valuesGet ];
 
+//category delete --need to modify
+async function categDeleteGet(req, res, next) {
+    //for now
+    res.redirect("/");
+}
+
 
 module.exports = {
     categoryMid,
-    categValMid
+    categValMid,
+    categDeleteGet
 }
 
+// delete method similar to the below process 
+
+/*
+<a href="/user/12?_method=DELETE" >Delete</a>
+
+router.use( function( req, res, next ) {
+    // this middleware will call for each requested
+    // and we checked for the requested query properties
+    // if _method was existed
+    // then we know, clients need to call DELETE request instead
+    if ( req.query._method == 'DELETE' ) {
+        // change the original METHOD
+        // into DELETE method
+        req.method = 'DELETE';
+        // and set requested url to /user/12
+        req.url = req.path;
+    }       
+    next(); 
+});
+
+router.delete( '/user/:id', function ( req, res ) {
+  // delete operation stuff
+});
+
+*/
